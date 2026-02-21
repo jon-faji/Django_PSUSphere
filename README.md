@@ -18,7 +18,7 @@ PSUSphere is a Django-based web application designed to manage student organizat
 ### 1. Clone the repository
 ```bash
 git clone <your-repo-url>
-cd PSUSphere
+cd Django_PSUSphere
 ```
 
 ### 2. Create and activate a virtual environment
