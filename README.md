@@ -52,6 +52,9 @@ python manage.py runserver
 ### 7. Access the admin panel
 Open [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) in your browser and log in with your superuser credentials.
 
+## Screenshot
+![PSUSphere Screenshot](images/Dashboard.png)
+
 ## Authors
 - Jon Faji
 - jasperOlpos27
