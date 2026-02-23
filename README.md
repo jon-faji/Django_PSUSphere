@@ -58,3 +58,4 @@ Open [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) in your browse
 ## Authors
 - Jon Faji
 - jasperOlpos27
+Deployed Version: https://jasperolpos27.pythonanywhere.com/
