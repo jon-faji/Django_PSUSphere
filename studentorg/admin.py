@@ -1,29 +1,33 @@
 from django.contrib import admin
-from .models import College, Program, Organization
+from .models import College, Program, Organization, Student, OrgMember
 
-# -------------------------------
-# Task A – CollegeAdmin
-# -------------------------------
+# ------------------ College ------------------
 @admin.register(College)
 class CollegeAdmin(admin.ModelAdmin):
-    list_display = ("college_name", "created_at", "updated_at")  # show these columns
-    search_fields = ("college_name",)  # add search by college_name
-    list_filter = ("created_at",)  # filter by created_at
+    list_display = ['name', 'address']  
+    search_fields = ['name', 'address']
 
-# -------------------------------
-# Task B – ProgramAdmin
-# -------------------------------
+# ------------------ Program ------------------
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
-    list_display = ("prog_name", "college")  # show program name and related college
-    search_fields = ("prog_name", "college__college_name")  # search by program name or college name
-    list_filter = ("college",)  # filter by college
+    list_display = ['name', 'college']  
+    list_filter = ['college']
+    search_fields = ['name', 'college__name']
 
-# -------------------------------
-# Task C – OrganizationAdmin
-# -------------------------------
+# ------------------ Organization ------------------
 @admin.register(Organization)
 class OrganizationAdmin(admin.ModelAdmin):
-    list_display = ("name", "college", "description")  # show name, college, description
-    search_fields = ("name", "description")  # search by name or description
-    list_filter = ("college",)  # filter by college
+    list_display = ['name', 'college', 'description']
+    search_fields = ['name', 'college__name']
+
+# ------------------ Student ------------------
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ['name', 'program', 'college']
+    search_fields = ['name', 'program__name', 'college__name']
+
+# ------------------ OrgMember ------------------
+@admin.register(OrgMember)
+class OrgMemberAdmin(admin.ModelAdmin):
+    list_display = ['name', 'role', 'organization']
+    search_fields = ['name', 'role', 'organization__name']

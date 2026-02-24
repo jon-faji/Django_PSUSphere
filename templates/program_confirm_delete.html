@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Delete Program</h4>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <!-- Card Header -->
+                    <div class="card-header">
+                        <div class="card-title">Delete Program</div>
+                        <div class="card-category">Confirm Deletion</div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="col-md-6">
+
+                            <form method="post">
+                                {% csrf_token %}
+
+                                <p class="mb-4">
+                                    Are you sure you want to delete 
+                                    <strong>"{{ object }}"</strong>?
+                                </p>
+
+                                <button type="submit" class="btn btn-danger btn-rounded">
+                                    Yes, Delete
+                                </button>
+
+                                <a href="{% url 'program_list' %}" class="btn btn-secondary btn-rounded">
+                                    Cancel
+                                </a>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

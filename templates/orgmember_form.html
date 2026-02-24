@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">{% if object %}Update Org Member{% else %}Add Org Member{% endif %}</h4>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <!-- Card Header -->
+                    <div class="card-header">
+                        <div class="card-title">
+                            {% if object %}
+                                Update Org Member
+                            {% else %}
+                                Add New Org Member
+                            {% endif %}
+                        </div>
+                        <div class="card-category">Page Subtitle</div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="col-md-6">
+                            <form method="post" novalidate>
+                                {% csrf_token %}
+
+                                {% for field in form %}
+                                <div class="mb-3">
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                    {% if field.errors %}
+                                    <div class="text-danger">{{ field.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+
+                                <div class="form-group mt-3">
+                                    <button type="submit" class="btn btn-primary btn-rounded">
+                                        Submit
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

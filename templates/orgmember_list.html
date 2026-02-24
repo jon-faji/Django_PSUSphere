@@ -1,10 +1,8 @@
 {% extends "base.html" %}
-{% load static %}
-
 {% block content %}
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">Home</h4>
+        <h4 class="page-title">Org Members</h4>
 
         <div class="row">
             <div class="col-md-12">
@@ -12,8 +10,8 @@
 
                     <!-- Header -->
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <div class="card-title">List of Organizations</div>
-                        <a href="{% url 'organization-add' %}" class="btn btn-success btn-sm">Add Organization</a>
+                        <div class="card-title">List of Members</div>
+                        <a href="{% url 'orgmember-add' %}" class="btn btn-success btn-sm">Add Member</a>
                     </div>
 
                     <!-- Table -->
@@ -22,40 +20,32 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>College</th>
-                                    <th>Description</th>
+                                    <th>Role</th>
+                                    <th>Organization</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {% for organization in organizations %}
+                                {% for member in orgmembers %}
                                 <tr>
-                                    <td>{{ organization.name }}</td>
-                                    <td>{{ organization.college }}</td>
-                                    <td>{{ organization.description }}</td>
-
+                                    <td>{{ member.name }}</td>
+                                    <td>{{ member.role }}</td>
+                                    <td>{{ member.organization }}</td>
                                     <td>
-                                        <a href="{% url 'organization-update' organization.id %}" class="btn btn-sm btn-primary">
-                                            Edit
-                                        </a>
-
-                                        <a href="{% url 'organization-delete' organization.id %}" class="btn btn-sm btn-danger">
-                                            Delete
-                                        </a>
+                                        <a href="{% url 'orgmember-update' member.id %}" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="{% url 'orgmember-delete' member.id %}" class="btn btn-sm btn-danger">Delete</a>
                                     </td>
                                 </tr>
-
                                 {% empty %}
                                 <tr>
-                                    <td colspan="4" class="text-center">
-                                        <strong>No Records Found</strong>
-                                    </td>
+                                    <td colspan="4" class="text-center"><strong>No Records Found</strong></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
 
+                        {# Optional: Include pagination if needed #}
                         {% include "includes/pagination.html" %}
                     </div>
 
