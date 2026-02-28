@@ -14,8 +14,19 @@
                         <a href="{% url 'program-add' %}" class="btn btn-success btn-sm">Add Program</a>
                     </div>
 
-                    <!-- Table -->
+                    <!-- Search and Sort Form -->
                     <div class="card-body">
+                        <form method="get" class="form-inline mb-3">
+                            <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search Programs..." class="form-control form-control-sm mr-2">
+                            <label class="mr-2">Sort by:</label>
+                            <select class="form-control form-control-sm mr-2" name="sort_by">
+                                <option value="name" {% if request.GET.sort_by == 'name' %}selected{% endif %}>Program Name</option>
+                                <option value="college__name" {% if request.GET.sort_by == 'college__name' %}selected{% endif %}>College</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                        </form>
+
+                        <!-- Table -->
                         <table class="table table-striped mt-3">
                             <thead>
                                 <tr>
@@ -28,7 +39,7 @@
                                 {% for program in programs %}
                                 <tr>
                                     <td>{{ program.name }}</td>
-                                    <td>{{ program.college }}</td>
+                                    <td>{{ program.college.name }}</td>
                                     <td>
                                         <a href="{% url 'program-update' program.id %}" class="btn btn-sm btn-primary">Edit</a>
                                         <a href="{% url 'program-delete' program.id %}" class="btn btn-sm btn-danger">Delete</a>
@@ -43,22 +54,24 @@
                         </table>
                     </div>
 
-                    <!-- Optional Pagination -->
+                    <!-- Pagination -->
                     {% if is_paginated %}
                     <div class="card-footer">
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center mb-0">
                                 {% if page_obj.has_previous %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.sort_by %}&sort_by={{ request.GET.sort_by }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Previous</a>
                                 </li>
                                 {% endif %}
+
                                 <li class="page-item disabled">
                                     <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
                                 </li>
+
                                 {% if page_obj.has_next %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.sort_by %}&sort_by={{ request.GET.sort_by }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
                                 </li>
                                 {% endif %}
                             </ul>

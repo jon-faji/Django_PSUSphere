@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.db.models import Q
 from .models import College, Program, Organization, Student, OrgMember
 from .forms import CollegeForm, ProgramForm, OrganizationForm, StudentForm, OrgMemberForm
 
@@ -7,12 +8,31 @@ from .forms import CollegeForm, ProgramForm, OrganizationForm, StudentForm, OrgM
 class HomePageView(TemplateView):
     template_name = "home.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Dashboard counts
+        context["college_count"] = College.objects.count()
+        context["program_count"] = Program.objects.count()
+        context["organization_count"] = Organization.objects.count()
+        context["student_count"] = Student.objects.count()
+        context["orgmember_count"] = OrgMember.objects.count()
+        return context
+
 # ------------------ College ------------------
 class CollegeListView(ListView):
     model = College
     template_name = "college_list.html"
     context_object_name = "colleges"
     paginate_by = 5
+
+    # Search feature
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get("q")
+        if query:
+            qs = qs.filter(name__icontains=query)
+        return qs
 
 class CollegeCreateView(CreateView):
     model = College
@@ -38,6 +58,23 @@ class ProgramListView(ListView):
     context_object_name = "programs"
     paginate_by = 5
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get("q")
+        if query:
+            qs = qs.filter(
+                Q(name__icontains=query) |
+                Q(college__name__icontains=query)
+            )
+        # Sorting
+        allowed_sort = ["name", "college__name"]
+        sort_by = self.request.GET.get("sort_by")
+        if sort_by in allowed_sort:
+            qs = qs.order_by(sort_by)
+        else:
+            qs = qs.order_by("name")
+        return qs
+
 class ProgramCreateView(CreateView):
     model = Program
     form_class = ProgramForm
@@ -61,6 +98,16 @@ class StudentListView(ListView):
     template_name = "student_list.html"
     context_object_name = "students"
     paginate_by = 5
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get("q")
+        if query:
+            qs = qs.filter(
+                Q(first_name__icontains=query) |
+                Q(last_name__icontains=query)
+            )
+        return qs
 
 class StudentCreateView(CreateView):
     model = Student
@@ -86,6 +133,25 @@ class OrgMemberListView(ListView):
     context_object_name = "orgmembers"
     paginate_by = 5
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get("q")
+        if query:
+            qs = qs.filter(
+                Q(name__icontains=query) |
+                Q(organization__name__icontains=query) |
+                Q(role__icontains=query)
+            )
+
+        # Sorting
+        allowed_sort = ["name", "date_joined"]
+        sort_by = self.request.GET.get("sort_by")
+        if sort_by in allowed_sort:
+            qs = qs.order_by(sort_by)
+        else:
+            qs = qs.order_by("name")  
+        return qs
+
 class OrgMemberCreateView(CreateView):
     model = OrgMember
     form_class = OrgMemberForm
@@ -109,6 +175,24 @@ class OrganizationList(ListView):
     template_name = "org_list.html"
     context_object_name = "organizations"
     paginate_by = 5
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        query = self.request.GET.get("q")
+        if query:
+            qs = qs.filter(
+                Q(name__icontains=query) |
+                Q(description__icontains=query)
+            )
+
+        # Sorting
+        allowed_sort = ["name", "college__name"]
+        sort_by = self.request.GET.get("sort_by")
+        if sort_by in allowed_sort:
+            qs = qs.order_by(sort_by)
+        else:
+            qs = qs.order_by("name")
+        return qs
 
 class OrganizationCreateView(CreateView):
     model = Organization

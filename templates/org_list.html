@@ -10,10 +10,33 @@
             <div class="col-md-12">
                 <div class="card">
 
-                    <!-- Header -->
+                    <!-- Header with Search and Add Button -->
                     <div class="card-header d-flex justify-content-between align-items-center">
+
                         <div class="card-title">List of Organizations</div>
-                        <a href="{% url 'organization-add' %}" class="btn btn-success btn-sm">Add Organization</a>
+
+                        <div class="d-flex align-items-center">
+
+                            <!-- Search Form -->
+                            <form method="GET"
+                                  action="{% url 'organization_list' %}"
+                                  class="form-inline mr-2">
+
+                                <input type="text"
+                                       name="q"
+                                       placeholder="Search..."
+                                       class="form-control form-control-sm"
+                                       value="{{ request.GET.q }}">
+
+                            </form>
+
+                            <!-- Add Button -->
+                            <a href="{% url 'organization-add' %}"
+                               class="btn btn-success btn-sm">
+                                Add Organization
+                            </a>
+
+                        </div>
                     </div>
 
                     <!-- Table -->
@@ -34,13 +57,14 @@
                                     <td>{{ organization.name }}</td>
                                     <td>{{ organization.college }}</td>
                                     <td>{{ organization.description }}</td>
-
                                     <td>
-                                        <a href="{% url 'organization-update' organization.id %}" class="btn btn-sm btn-primary">
+                                        <a href="{% url 'organization-update' organization.id %}"
+                                           class="btn btn-sm btn-primary">
                                             Edit
                                         </a>
 
-                                        <a href="{% url 'organization-delete' organization.id %}" class="btn btn-sm btn-danger">
+                                        <a href="{% url 'organization-delete' organization.id %}"
+                                           class="btn btn-sm btn-danger">
                                             Delete
                                         </a>
                                     </td>
