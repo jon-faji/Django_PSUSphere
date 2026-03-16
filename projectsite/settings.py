@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-l%ebdw6t&i==%qjh^zku^32*mj*)@%_6j32iy8a)5g&&e37o-l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'psusphere.pythonanywhere.com']
 
 
 # Application definition
@@ -61,7 +61,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'projectsite.urls'
 
-SITE_ID = 1
+# Dynamic SITE_ID based on environment
+import socket
+if "pythonanywhere" in socket.gethostname():
+    SITE_ID = 2  # production site (psusphere.pythonanywhere.com)
+else:
+    SITE_ID = 1  # local site (127.0.0.1:8000)
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -77,6 +82,7 @@ LOGOUT_REDIRECT_URL = '/accounts/login/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGIN_METHODS = {'email', 'username'}
+ACCOUNT_SIGNUP_FIELDS = ['username', 'email', 'password1', 'password2']
 
 TEMPLATES = [
     {
@@ -89,6 +95,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.request",
             ],
         },
     },
