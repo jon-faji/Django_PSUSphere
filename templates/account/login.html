@@ -50,16 +50,18 @@
                     <!-- Social login buttons -->
                     <div class="text-center mb-4">
                         <p class="fw-bold mb-3">Sign in with:</p>
-                        <div class="d-flex justify-content-center gap-3">
-                            <a href="{% provider_login_url 'google' %}" class="btn btn-outline-secondary btn-lg rounded-circle" style="width: 60px; height: 60px; padding: 0;" title="Sign in with Google">
-                                <i class="fab fa-google" style="font-size: 24px;"></i>
+                        <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
+                            <a href="{% provider_login_url 'google' %}" class="btn btn-outline-primary btn-lg rounded-circle" style="width: 60px; height: 60px; padding: 0; display: flex; align-items: center; justify-content: center;" title="Sign in with Google">
+                                <i class="fab fa-google" style="font-size: 28px;"></i>
                             </a>
-                            <a href="{% provider_login_url 'github' %}" class="btn btn-outline-secondary btn-lg rounded-circle" style="width: 60px; height: 60px; padding: 0;" title="Sign in with GitHub">
-                                <i class="fab fa-github" style="font-size: 24px;"></i>
+                            {% if False %}
+                            <a href="{% provider_login_url 'github' %}" class="btn btn-outline-primary btn-lg rounded-circle" style="width: 60px; height: 60px; padding: 0; display: flex; align-items: center; justify-content: center;" title="Sign in with GitHub">
+                                <i class="fab fa-github" style="font-size: 28px;"></i>
                             </a>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="text-center mb-3">
+                    <div class="text-center mb-4">
                         <p><small class="text-muted">or use your email</small></p>
                     </div>
                     <!-- Username / Email -->
@@ -102,16 +104,18 @@
                     <!-- Social login buttons -->
                     <div class="text-center mb-4">
                         <p class="fw-bold mb-3">Sign up with:</p>
-                        <div class="d-flex justify-content-center gap-3">
-                            <a href="{% provider_login_url 'google' %}" class="btn btn-outline-secondary btn-lg rounded-circle" style="width: 60px; height: 60px; padding: 0;" title="Sign up with Google">
-                                <i class="fab fa-google" style="font-size: 24px;"></i>
+                        <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
+                            <a href="{% provider_login_url 'google' %}" class="btn btn-outline-primary btn-lg rounded-circle" style="width: 60px; height: 60px; padding: 0; display: flex; align-items: center; justify-content: center;" title="Sign up with Google">
+                                <i class="fab fa-google" style="font-size: 28px;"></i>
                             </a>
-                            <a href="{% provider_login_url 'github' %}" class="btn btn-outline-secondary btn-lg rounded-circle" style="width: 60px; height: 60px; padding: 0;" title="Sign up with GitHub">
-                                <i class="fab fa-github" style="font-size: 24px;"></i>
+                            {% if False %}
+                            <a href="{% provider_login_url 'github' %}" class="btn btn-outline-primary btn-lg rounded-circle" style="width: 60px; height: 60px; padding: 0; display: flex; align-items: center; justify-content: center;" title="Sign up with GitHub">
+                                <i class="fab fa-github" style="font-size: 28px;"></i>
                             </a>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="text-center mb-3">
+                    <div class="text-center mb-4">
                         <p><small class="text-muted">or create an account</small></p>
                     </div>
                     <!-- Username -->
