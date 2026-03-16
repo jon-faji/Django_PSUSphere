@@ -76,9 +76,9 @@ Users can log in using either their username or email address at [http://127.0.0
   - Sites: Select your site (127.0.0.1:8000)
 
 **3. For Production (PythonAnywhere):**
-- Update Google OAuth redirect URI to: `https://psusphere.pythonanywhere.com/accounts/google/login/callback/`
-- Update Sites in Django Admin with your deployed domain
-- Ensure ALLOWED_HOSTS includes your domain: `['127.0.0.1', 'localhost', 'psusphere.pythonanywhere.com']`
+- Update Google OAuth redirect URI to: `https://jonzfaj.pythonanywhere.com/accounts/google/login/callback/`
+- Update Sites in Django Admin with your deployed domain: `jonzfaj.pythonanywhere.com`
+- Ensure ALLOWED_HOSTS includes your domain: `['127.0.0.1', 'localhost', 'jonzfaj.pythonanywhere.com']`
 
 ### Files Related to Authentication
 - **Login Template**: [templates/account/login.html](templates/account/login.html)
@@ -91,4 +91,4 @@ Users can log in using either their username or email address at [http://127.0.0
 ## Authors
 - Jon Faji
 - jasperOlpos27
-Deployed Version: https://jasperolpos27.pythonanywhere.com/
+Deployed Version: https://jonzfaj.pythonanywhere.com/
