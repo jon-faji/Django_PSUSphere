@@ -86,7 +86,8 @@ Users can log in using either their username or email address at [http://127.0.0
 - **Settings**: django-allauth is configured in [projectsite/settings.py](projectsite/settings.py)
 
 ## Screenshot
-![PSUSphere Screenshot](images/Dashboard.png)
+![PSUSphere Screenshot](images/Updated_Dashboard.png)
+![PSUSphere Screenshot](images/Login.png)
 
 ## Authors
 - Jon Faji
